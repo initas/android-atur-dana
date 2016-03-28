@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/source_item"
     android:layout_width="277.5dp"
     android:layout_height="150dp"
     android:layout_marginBottom="8dp"
@@ -9,55 +10,70 @@
     android:paddingTop="16dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="5dp"
-        android:includeFontPadding="false"
         android:layout_marginLeft="8dp"
+        android:includeFontPadding="false"
         android:text="ATM BCA"
         android:textColor="#ffffff"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/total_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
+        android:layout_below="@id/name"
         android:layout_gravity="bottom"
-        android:includeFontPadding="false"
         android:layout_marginLeft="8dp"
+        android:includeFontPadding="false"
         android:text="IDR 500,000,000,000"
         android:textColor="#ffffff"
         android:textSize="10sp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/total_transaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@id/total_amount"
         android:layout_gravity="bottom"
-        android:includeFontPadding="false"
         android:layout_marginLeft="8dp"
+        android:includeFontPadding="false"
         android:text="310 Transaksi"
         android:textColor="#ffffff"
         android:textSize="10sp" />
 
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/icon_class"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="{fa-heart}"
+        android:textColor="#fff"
+        android:textSize="60dp" />
+
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/total_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@id/total_transaction"
         android:layout_gravity="bottom"
-        android:includeFontPadding="false"
         android:layout_marginLeft="8dp"
+        android:includeFontPadding="false"
         android:text="2 Users"
         android:textColor="#ffffff"
         android:textSize="10sp" />
@@ -67,7 +83,7 @@
         android:layout_height="15dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/total_user"
         android:layout_gravity="bottom"
         android:layout_marginTop="9dp"
         android:background="#1A000000" />

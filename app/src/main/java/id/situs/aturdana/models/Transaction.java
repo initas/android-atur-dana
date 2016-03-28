@@ -1,9 +1,9 @@
-package id.situs.aturdana;
+package id.situs.aturdana.models;
 
 /**
  * Created by MF on 3/20/16.
  */
-public class TransactionInfo {
+public class Transaction {
     private String name;
     private String imageUrl;
     private String title;

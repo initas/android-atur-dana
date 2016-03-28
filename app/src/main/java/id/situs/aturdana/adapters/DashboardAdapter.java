@@ -3,6 +3,7 @@ package id.situs.aturdana.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import id.situs.aturdana.R;
-import id.situs.aturdana.TransactionInfo;
+import id.situs.aturdana.models.Transaction;
+import id.situs.aturdana.data.Dummy;
 
 /**
  * Created by MF on 3/20/16.
@@ -24,13 +26,20 @@ import id.situs.aturdana.TransactionInfo;
 public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
+    private List<Transaction> transactionList;
 
-    private List<TransactionInfo> transactionList;
+    public static class TransactionHeaderViewHolder extends RecyclerView.ViewHolder {
+        protected RecyclerView source_list;
+        protected TextView total_amount;
 
-    private String[] dataSet;
+        public TransactionHeaderViewHolder(View v) {
+            super(v);
+            source_list = (RecyclerView) v.findViewById(R.id.source_list);
+            total_amount = (TextView) v.findViewById(R.id.total_amount);
+        }
+    }
 
     public static class TransactionViewHolder extends RecyclerView.ViewHolder {
-
         protected TextView vName;
         protected ImageView vImage;
         protected TextView vTitle;
@@ -50,12 +59,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             vCategoryName = (TextView) v.findViewById(R.id.category_name);
             vCategoryIconClass = (TextView) v.findViewById(R.id.category_icon_class);
             vInfoContainer = (RelativeLayout) v.findViewById(R.id.info_container);
-
             vTitle = (TextView) v.findViewById(R.id.title);
         }
     }
 
-    public DashboardAdapter(List<TransactionInfo> transactionList) {
+    public DashboardAdapter(List<Transaction> transactionList) {
         this.transactionList = transactionList;
     }
 
@@ -84,7 +92,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         if (holder instanceof TransactionViewHolder) {
             TransactionViewHolder transactionViewHolder = (TransactionViewHolder) holder;
-            TransactionInfo ci = transactionList.get((i - 1));
+            Transaction ci = transactionList.get((i - 1));
             transactionViewHolder.vName.setText(ci.getName());
             transactionViewHolder.vTitle.setText(ci.getTitle());
             transactionViewHolder.vAmount.setText(ci.getAmount());
@@ -96,7 +104,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Context context = transactionViewHolder.vImage.getContext();
             Picasso.with(context).load(Uri.parse(ci.getImageUrl())).into(transactionViewHolder.vImage);
         } else if (holder instanceof TransactionHeaderViewHolder) {
-            //cast holder to VHHeader and set data for header.
+            TransactionHeaderViewHolder transactionHeaderViewHolder = (TransactionHeaderViewHolder) holder;
+            transactionHeaderViewHolder.total_amount.setText("300,000 IDR");
+
+            //source list
+            Context context = transactionHeaderViewHolder.source_list.getContext();
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            transactionHeaderViewHolder.source_list.setLayoutManager(layoutManager);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            SourceAdapter sourceAdapter = new SourceAdapter(Dummy.createSourceList());
+            transactionHeaderViewHolder.source_list.setAdapter(sourceAdapter);
         }
     }
 
@@ -116,12 +133,5 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private boolean isPositionHeader(int position) {
         return position == 0;
     }
-
-
-    public static class TransactionHeaderViewHolder extends RecyclerView.ViewHolder {
-
-        public TransactionHeaderViewHolder(View v) {
-            super(v);
-        }
-    }
 }
+
