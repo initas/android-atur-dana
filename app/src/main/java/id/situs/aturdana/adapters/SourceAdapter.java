@@ -1,6 +1,9 @@
 package id.situs.aturdana.adapters;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,31 +14,32 @@ import java.util.List;
 
 import id.situs.aturdana.R;
 import id.situs.aturdana.models.Source;
+import id.situs.aturdana.models.User;
 
 /**
  * Created by MF on 3/20/16.
  */
 public class SourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
     private List<Source> sourceList;
 
     public static class SourceViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private TextView totalAmount;
-        private TextView totalTransaction;
-        private TextView totalUser;
+        private TextView transactionCount;
+        private TextView collaboratorCount;
         private TextView iconClass;
         private View sourceItem;
+        private RecyclerView collaboratorList;
 
         public SourceViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.name);
             totalAmount = (TextView) v.findViewById(R.id.total_amount);
-            totalTransaction = (TextView) v.findViewById(R.id.total_transaction);
-            totalUser = (TextView) v.findViewById(R.id.total_user);
+            transactionCount = (TextView) v.findViewById(R.id.transaction_count);
+            collaboratorCount = (TextView) v.findViewById(R.id.collaborator_count);
             iconClass = (TextView) v.findViewById(R.id.icon_class);
             sourceItem = v.findViewById(R.id.source_item);
+            collaboratorList = (RecyclerView) v.findViewById(R.id.collaborator_list);
         }
     }
 
@@ -55,29 +59,31 @@ public class SourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int i) {
         SourceViewHolder sourceViewHolder = (SourceViewHolder) holder;
-        Source si = sourceList.get((i));
+        Source si = sourceList.get(i);
+        String color = si.getHexColor();
+
         sourceViewHolder.name.setText(si.getName());
-        sourceViewHolder.totalAmount.setText(si.getTotalAmount());
-        sourceViewHolder.totalTransaction.setText(si.getTotalTransaction());
-        sourceViewHolder.totalUser.setText(si.getTotalUser());
+        sourceViewHolder.totalAmount.setText(si.getAmount() + "");
+        sourceViewHolder.transactionCount.setText(si.getTransactionCount() + "");
+        sourceViewHolder.collaboratorCount.setText(si.getCollaboratorCount() + "");
         sourceViewHolder.iconClass.setText(si.getIconClass());
-        sourceViewHolder.sourceItem.setBackgroundColor(Color.parseColor(si.getHexColor()));
+
+        GradientDrawable drawable = (GradientDrawable) sourceViewHolder.sourceItem.getBackground();
+        drawable.setColor(Color.parseColor(color));
+
+        List<User> collaborators = si.getCollaborators();
+
+        //source list
+        Context context = sourceViewHolder.collaboratorList.getContext();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        sourceViewHolder.collaboratorList.setLayoutManager(layoutManager);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        CollaboratorAdapter sourceAdapter = new CollaboratorAdapter(collaborators, color);
+        sourceViewHolder.collaboratorList.setAdapter(sourceAdapter);
     }
 
     @Override
     public int getItemCount() {
         return sourceList.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (isPositionHeader(position))
-            return TYPE_HEADER;
-
-        return TYPE_ITEM;
-    }
-
-    private boolean isPositionHeader(int position) {
-        return position == 0;
     }
 }

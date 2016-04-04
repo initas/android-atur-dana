@@ -29,4 +29,11 @@ dependencies {
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.1' // (v4.5)
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.google.code.gson:gson:2.6.1'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+
 }

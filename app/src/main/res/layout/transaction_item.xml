@@ -99,27 +99,47 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/pin"
+            <com.joanzapata.iconify.widget.IconTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:layout_marginRight="15px"
-                android:layout_marginTop="15dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
                 android:includeFontPadding="false"
-                android:text="Comment"
-                android:textSize="7.5dp" />
+                android:text="{fa-bookmark-o}"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:layout_marginRight="15px"
-                android:layout_marginTop="15dp"
+                android:layout_marginRight="32px"
+                android:layout_marginTop="12dp"
                 android:includeFontPadding="false"
                 android:text="Comment"
-                android:textSize="7.5dp" />
+                android:textSize="8dp" />
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:includeFontPadding="false"
+                android:text="{fa-comment-o}"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/pin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="16px"
+                android:layout_marginTop="12dp"
+                android:includeFontPadding="false"
+                android:text="Comment"
+                android:textSize="8dp" />
 
         </LinearLayout>
 

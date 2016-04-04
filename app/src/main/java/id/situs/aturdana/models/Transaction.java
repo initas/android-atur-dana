@@ -1,79 +1,222 @@
+
 package id.situs.aturdana.models;
 
-/**
- * Created by MF on 3/20/16.
- */
+import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+@Generated("org.jsonschema2pojo")
 public class Transaction {
-    private String name;
-    private String imageUrl;
-    private String title;
-    private String amount;
-    private String timestamp;
-    private String categoryName;
-    private String categoryIconClass;
-    private String categoryHexColor;
 
-    public String getName() {
-        return name;
+    @SerializedName("id")
+    @Expose
+    private int id;
+    @SerializedName("amount")
+    @Expose
+    private Double amount;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("transaction_at")
+    @Expose
+    private int transactionAt;
+    @SerializedName("updated_at")
+    @Expose
+    private int updatedAt;
+    @SerializedName("user")
+    @Expose
+    private User user;
+    @SerializedName("source")
+    @Expose
+    private Source source;
+    @SerializedName("category")
+    @Expose
+    private Category category;
+    @SerializedName("image")
+    @Expose
+    private Image image;
+    @SerializedName("location")
+    @Expose
+    private Location location;
+
+    /**
+     * 
+     * @return
+     *     The id
+     */
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * 
+     * @param id
+     *     The id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAmount() {
+    /**
+     * 
+     * @return
+     *     The amount
+     */
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    /**
+     * 
+     * @param amount
+     *     The amount
+     */
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public String getTimestamp() {
-        return timestamp;
+    /**
+     * 
+     * @return
+     *     The description
+     */
+    public String getDescription() {
+        return description;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    /**
+     * 
+     * @param description
+     *     The description
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    /**
+     * 
+     * @return
+     *     The transactionAt
+     */
+    public int getTransactionAt() {
+        return transactionAt;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    /**
+     * 
+     * @param transactionAt
+     *     The transaction_at
+     */
+    public void setTransactionAt(int transactionAt) {
+        this.transactionAt = transactionAt;
     }
 
-    public String getCategoryIconClass() {
-        return categoryIconClass;
+    /**
+     * 
+     * @return
+     *     The updatedAt
+     */
+    public int getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setCategoryIconClass(String categoryIconClass) {
-        this.categoryIconClass = categoryIconClass;
+    /**
+     * 
+     * @param updatedAt
+     *     The updated_at
+     */
+    public void setUpdatedAt(int updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public String getCategoryHexColor() {
-        return categoryHexColor;
+    /**
+     * 
+     * @return
+     *     The user
+     */
+    public User getUser() {
+        return user;
     }
 
-    public void setCategoryHexColor(String categoryHexColor) {
-        this.categoryHexColor = categoryHexColor;
+    /**
+     * 
+     * @param user
+     *     The user
+     */
+    public void setUser(User user) {
+        this.user = user;
     }
+
+    /**
+     * 
+     * @return
+     *     The source
+     */
+    public Source getSource() {
+        return source;
+    }
+
+    /**
+     * 
+     * @param source
+     *     The source
+     */
+    public void setSource(Source source) {
+        this.source = source;
+    }
+
+    /**
+     * 
+     * @return
+     *     The category
+     */
+    public Category getCategory() {
+        return category;
+    }
+
+    /**
+     * 
+     * @param category
+     *     The category
+     */
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    /**
+     * 
+     * @return
+     *     The image
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * 
+     * @param image
+     *     The image
+     */
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    /**
+     * 
+     * @return
+     *     The location
+     */
+    public Location getLocation() {
+        return location;
+    }
+
+    /**
+     * 
+     * @param location
+     *     The location
+     */
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
 }

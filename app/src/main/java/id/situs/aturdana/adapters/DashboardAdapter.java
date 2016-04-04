@@ -17,8 +17,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import id.situs.aturdana.R;
+import id.situs.aturdana.models.Dashboard;
+import id.situs.aturdana.models.Source;
 import id.situs.aturdana.models.Transaction;
-import id.situs.aturdana.data.Dummy;
 
 /**
  * Created by MF on 3/20/16.
@@ -26,6 +27,7 @@ import id.situs.aturdana.data.Dummy;
 public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
+    private Dashboard dashboard;
     private List<Transaction> transactionList;
 
     public static class TransactionHeaderViewHolder extends RecyclerView.ViewHolder {
@@ -63,8 +65,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public DashboardAdapter(List<Transaction> transactionList) {
-        this.transactionList = transactionList;
+    public DashboardAdapter(Dashboard dashboard) {
+        this.dashboard = dashboard;
+        this.transactionList = dashboard.getTransactions();
     }
 
     @Override
@@ -84,7 +87,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return new TransactionHeaderViewHolder(itemView);
         }
 
-        throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
+        throw new RuntimeException(viewType + " type is undefined");
     }
 
     @Override
@@ -92,27 +95,32 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         if (holder instanceof TransactionViewHolder) {
             TransactionViewHolder transactionViewHolder = (TransactionViewHolder) holder;
-            Transaction ci = transactionList.get((i - 1));
-            transactionViewHolder.vName.setText(ci.getName());
-            transactionViewHolder.vTitle.setText(ci.getTitle());
-            transactionViewHolder.vAmount.setText(ci.getAmount());
-            transactionViewHolder.vCategoryName.setText(ci.getCategoryName());
-            transactionViewHolder.vCategoryIconClass.setText(ci.getCategoryIconClass());
-            transactionViewHolder.vInfoContainer.setBackgroundColor(Color.parseColor(ci.getCategoryHexColor()));
-            transactionViewHolder.vTimestamp.setText(ci.getTimestamp());
+            Transaction transaction = transactionList.get(i - 1);
+
+            transactionViewHolder.vTitle.setText("Mengunakan " + transaction.getSource().getName());
+            transactionViewHolder.vAmount.setText(transaction.getAmount() + "");
+            transactionViewHolder.vCategoryName.setText(transaction.getCategory().getName());
+            transactionViewHolder.vInfoContainer.setBackgroundColor(Color.parseColor(transaction.getCategory().getHexColor()));
+            transactionViewHolder.vCategoryIconClass.setText(transaction.getCategory().getIconClass());
+            transactionViewHolder.vTimestamp.setText(transaction.getUpdatedAt() + "");
 
             Context context = transactionViewHolder.vImage.getContext();
-            Picasso.with(context).load(Uri.parse(ci.getImageUrl())).into(transactionViewHolder.vImage);
+            Picasso.with(context).load(Uri.parse("http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg")).into(transactionViewHolder.vImage);
+            //Picasso.with(context).load(Uri.parse(ci.getImageUrl())).into(transactionViewHolder.vImage);
+
         } else if (holder instanceof TransactionHeaderViewHolder) {
             TransactionHeaderViewHolder transactionHeaderViewHolder = (TransactionHeaderViewHolder) holder;
-            transactionHeaderViewHolder.total_amount.setText("300,000 IDR");
+
+            transactionHeaderViewHolder.total_amount.setText(dashboard.getTotalAmount() + " IDR");
+
+            List<Source> Sources = dashboard.getSources();
 
             //source list
             Context context = transactionHeaderViewHolder.source_list.getContext();
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             transactionHeaderViewHolder.source_list.setLayoutManager(layoutManager);
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            SourceAdapter sourceAdapter = new SourceAdapter(Dummy.createSourceList());
+            SourceAdapter sourceAdapter = new SourceAdapter(Sources);
             transactionHeaderViewHolder.source_list.setAdapter(sourceAdapter);
         }
     }

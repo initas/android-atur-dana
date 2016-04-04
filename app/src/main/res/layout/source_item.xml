@@ -5,7 +5,7 @@
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="8dp"
     android:layout_marginTop="8dp"
-    android:background="#E74C3C"
+    android:background="@drawable/corner"
     android:paddingBottom="9dp"
     android:paddingTop="16dp">
 
@@ -36,7 +36,7 @@
         android:textSize="10sp" />
 
     <TextView
-        android:id="@+id/total_transaction"
+        android:id="@+id/transaction_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -54,10 +54,10 @@
         android:id="@+id/icon_class"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginRight="8dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_marginRight="8dp"
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="{fa-heart}"
@@ -65,12 +65,12 @@
         android:textSize="60dp" />
 
     <TextView
-        android:id="@+id/total_user"
+        android:id="@+id/collaborator_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/total_transaction"
+        android:layout_below="@id/transaction_count"
         android:layout_gravity="bottom"
         android:layout_marginLeft="8dp"
         android:includeFontPadding="false"
@@ -79,13 +79,26 @@
         android:textSize="10sp" />
 
     <View
+        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="15dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/total_user"
+        android:layout_below="@id/collaborator_count"
         android:layout_gravity="bottom"
         android:layout_marginTop="9dp"
         android:background="#1A000000" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/collaborator_list"
+        android:layout_below="@+id/line"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+
 
 </RelativeLayout>
