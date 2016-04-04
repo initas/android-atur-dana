@@ -14,9 +14,9 @@ public class Source {
     @SerializedName("id")
     @Expose
     private int id;
-    @SerializedName("user_id")
+    @SerializedName("user")
     @Expose
-    private int userId;
+    private User user;
     @SerializedName("name")
     @Expose
     private String name;
@@ -57,17 +57,17 @@ public class Source {
     }
 
     /**
-     * @return The userId
+     * @return The user
      */
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * @param userId The user_id
+     * @param user The user
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**

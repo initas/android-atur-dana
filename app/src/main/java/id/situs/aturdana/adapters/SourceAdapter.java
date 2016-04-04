@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import id.situs.aturdana.R;
@@ -61,12 +62,16 @@ public class SourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         SourceViewHolder sourceViewHolder = (SourceViewHolder) holder;
         Source si = sourceList.get(i);
         String color = si.getHexColor();
+        User user = si.getUser();
 
         sourceViewHolder.name.setText(si.getName());
-        sourceViewHolder.totalAmount.setText(si.getAmount() + "");
         sourceViewHolder.transactionCount.setText(si.getTransactionCount() + "");
         sourceViewHolder.collaboratorCount.setText(si.getCollaboratorCount() + "");
         sourceViewHolder.iconClass.setText(si.getIconClass());
+
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        String totalAmount = formatter.format(si.getAmount());
+        sourceViewHolder.totalAmount.setText(totalAmount + " IDR");
 
         GradientDrawable drawable = (GradientDrawable) sourceViewHolder.sourceItem.getBackground();
         drawable.setColor(Color.parseColor(color));
@@ -78,7 +83,7 @@ public class SourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         sourceViewHolder.collaboratorList.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        CollaboratorAdapter sourceAdapter = new CollaboratorAdapter(collaborators, color);
+        CollaboratorAdapter sourceAdapter = new CollaboratorAdapter(collaborators, color, user);
         sourceViewHolder.collaboratorList.setAdapter(sourceAdapter);
     }
 

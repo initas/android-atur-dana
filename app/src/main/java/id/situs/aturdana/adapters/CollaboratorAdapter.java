@@ -22,14 +22,25 @@ import id.situs.aturdana.models.User;
  */
 public class CollaboratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_ITEM = 1;
+    private static final int TYPE_HEADER = 2;
     private static final int TYPE_FOOTER = 3;
     private List<User> collaboratorList;
     private String color;
+    private User userDetail;
 
     public static class CollaboratorViewHolder extends RecyclerView.ViewHolder {
         protected ImageView image;
 
         public CollaboratorViewHolder(View v) {
+            super(v);
+            image = (ImageView) v.findViewById(R.id.image);
+        }
+    }
+
+    public static class CollaboratorHeaderViewHolder extends RecyclerView.ViewHolder {
+        protected ImageView image;
+
+        public CollaboratorHeaderViewHolder(View v) {
             super(v);
             image = (ImageView) v.findViewById(R.id.image);
         }
@@ -44,9 +55,10 @@ public class CollaboratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public CollaboratorAdapter(List<User> collaboratorList, String color) {
+    public CollaboratorAdapter(List<User> collaboratorList, String color, User user) {
         this.collaboratorList = collaboratorList;
         this.color = color;
+        this.userDetail = user;
     }
 
     @Override
@@ -58,6 +70,12 @@ public class CollaboratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     inflate(R.layout.collaborator_item, viewGroup, false);
 
             return new CollaboratorViewHolder(itemView);
+        } else if (viewType == TYPE_HEADER) {
+            View itemView = LayoutInflater.
+                    from(viewGroup.getContext()).
+                    inflate(R.layout.collaborator_item, viewGroup, false);
+
+            return new CollaboratorHeaderViewHolder(itemView);
         } else if (viewType == TYPE_FOOTER) {
             View itemView = LayoutInflater.
                     from(viewGroup.getContext()).
@@ -74,11 +92,22 @@ public class CollaboratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if (holder instanceof CollaboratorViewHolder) {
             CollaboratorViewHolder userViewHolder = (CollaboratorViewHolder) holder;
-            User user = collaboratorList.get(i);
+            User user = collaboratorList.get(i - 1);
+
+            //String imageUrl = user.getImage().getOriginal();
+            String imageUrl = "http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg";
 
             Context context = userViewHolder.image.getContext();
-            Picasso.with(context).load(Uri.parse("http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg")).into(userViewHolder.image);
-            //Picasso.with(context).load(Uri.parse(ci.getImageUrl())).into(userViewHolder.vImage);
+            Picasso.with(context).load(Uri.parse(imageUrl)).into(userViewHolder.image);
+
+        } else if (holder instanceof CollaboratorHeaderViewHolder) {
+            CollaboratorHeaderViewHolder ownerViewHolder = (CollaboratorHeaderViewHolder) holder;
+
+            //String imageUrl = userDetail.getImage().getOriginal();
+            String imageUrl = "http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg";
+
+            Context context = ownerViewHolder.image.getContext();
+            Picasso.with(context).load(Uri.parse(imageUrl)).into(ownerViewHolder.image);
 
         } else if (holder instanceof CollaboratorFooterViewHolder) {
             CollaboratorFooterViewHolder sourceViewFooterHolder = (CollaboratorFooterViewHolder) holder;
@@ -88,7 +117,7 @@ public class CollaboratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return collaboratorList.size()+1;
+        return collaboratorList.size() + 2;
     }
 
     @Override
@@ -96,11 +125,18 @@ public class CollaboratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (isPositionFooter(position))
             return TYPE_FOOTER;
 
+        if (isPositionHeader(position))
+            return TYPE_HEADER;
+
         return TYPE_ITEM;
     }
 
     private boolean isPositionFooter(int position) {
-        return position == collaboratorList.size();
+        return position == collaboratorList.size()+1;
+    }
+
+    private boolean isPositionHeader(int position) {
+        return position == 0;
     }
 }
 
