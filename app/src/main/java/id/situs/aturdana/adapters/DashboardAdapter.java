@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import id.situs.aturdana.R;
@@ -44,7 +46,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public static class TransactionViewHolder extends RecyclerView.ViewHolder {
         protected TextView vName;
         protected ImageView vImage;
+        protected ImageView vPhoto;
         protected TextView vTitle;
+        protected TextView vDescription;
         protected TextView vAmount;
         protected TextView vCategoryName;
         protected TextView vCategoryIconClass;
@@ -55,7 +59,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(v);
             vName = (TextView) v.findViewById(R.id.name);
             vImage = (ImageView) v.findViewById(R.id.image);
+            vPhoto = (ImageView) v.findViewById(R.id.photo);
             vTitle = (TextView) v.findViewById(R.id.title);
+            vDescription = (TextView) v.findViewById(R.id.description);
             vAmount = (TextView) v.findViewById(R.id.amount);
             vTimestamp = (TextView) v.findViewById(R.id.timestamp);
             vCategoryName = (TextView) v.findViewById(R.id.category_name);
@@ -98,11 +104,32 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Transaction transaction = transactionList.get(i - 1);
 
             transactionViewHolder.vTitle.setText("Mengunakan " + transaction.getSource().getName());
-            transactionViewHolder.vAmount.setText(transaction.getAmount() + "");
             transactionViewHolder.vCategoryName.setText(transaction.getCategory().getName());
             transactionViewHolder.vInfoContainer.setBackgroundColor(Color.parseColor(transaction.getCategory().getHexColor()));
             transactionViewHolder.vCategoryIconClass.setText(transaction.getCategory().getIconClass());
-            transactionViewHolder.vTimestamp.setText(transaction.getUpdatedAt() + "");
+
+            String time = (String) DateUtils.getRelativeTimeSpanString(transaction.getUpdatedAt());
+            transactionViewHolder.vTimestamp.setText(time);
+
+            DecimalFormat formatter = new DecimalFormat("#,###,###");
+            String totalAmount = formatter.format(transaction.getAmount());
+            transactionViewHolder.vAmount.setText(totalAmount + " IDR");
+
+            String description = transaction.getDescription();
+
+            if (description != null) {
+                transactionViewHolder.vDescription.setText(description);
+                transactionViewHolder.vDescription.setVisibility(View.VISIBLE);
+            }
+
+
+            String photo = transaction.getImage().getOriginal();
+
+            if (photo != null) {
+                photo = "http://media2.popsugar-assets.com/files/2015/12/18/904/n/1922195/2540e9bd_edit_img_image_17359796_1450469569.xxlarge/i/Mini-Cheesy-Potato-Gratins.jpg";
+                Context context = transactionViewHolder.vPhoto.getContext();
+                Picasso.with(context).load(Uri.parse(photo)).into(transactionViewHolder.vPhoto);
+            }
 
             Context context = transactionViewHolder.vImage.getContext();
             Picasso.with(context).load(Uri.parse("http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg")).into(transactionViewHolder.vImage);
@@ -111,7 +138,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (holder instanceof TransactionHeaderViewHolder) {
             TransactionHeaderViewHolder transactionHeaderViewHolder = (TransactionHeaderViewHolder) holder;
 
-            transactionHeaderViewHolder.total_amount.setText(dashboard.getTotalAmount() + " IDR");
+            DecimalFormat formatter = new DecimalFormat("#,###,###");
+            String totalAmount = formatter.format(dashboard.getTotalAmount());
+            transactionHeaderViewHolder.total_amount.setText(totalAmount + " IDR");
 
             List<Source> Sources = dashboard.getSources();
 

@@ -15,19 +15,23 @@
             android:id="@+id/image"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="15dp" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/image"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_toEndOf="@id/image"
             android:layout_toRightOf="@id/image"
             android:includeFontPadding="false"
             android:text="Hatsune Miku"
-            android:textSize="14dp" />
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/title"
@@ -51,18 +55,38 @@
             android:text="1 jam lalu"
             android:textSize="10dp" />
 
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart" />
+
         <RelativeLayout
             android:id="@+id/info_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/image"
+            android:layout_below="@id/photo"
             android:background="#4A90E2">
 
             <com.joanzapata.iconify.widget.IconTextView
                 android:id="@+id/category_icon_class"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:layout_margin="15dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="I"
@@ -102,9 +126,9 @@
             <com.joanzapata.iconify.widget.IconTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:includeFontPadding="false"
                 android:text="{fa-bookmark-o}"
                 android:textSize="20dp" />
@@ -113,9 +137,9 @@
                 android:id="@+id/comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginRight="32px"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="6dp"
                 android:includeFontPadding="false"
                 android:text="Comment"
                 android:textSize="8dp" />
@@ -123,9 +147,9 @@
             <com.joanzapata.iconify.widget.IconTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:includeFontPadding="false"
                 android:text="{fa-comment-o}"
                 android:textSize="20dp" />
@@ -134,9 +158,9 @@
                 android:id="@+id/pin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginRight="16px"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="6dp"
                 android:includeFontPadding="false"
                 android:text="Comment"
                 android:textSize="8dp" />
