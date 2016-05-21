@@ -65,8 +65,8 @@ public class SourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         User user = si.getUser();
 
         sourceViewHolder.name.setText(si.getName());
-        sourceViewHolder.transactionCount.setText(si.getTransactionCount() + "");
-        sourceViewHolder.collaboratorCount.setText(si.getCollaboratorCount() + "");
+        sourceViewHolder.transactionCount.setText(si.getTransactionCount() + " Transaksi");
+        sourceViewHolder.collaboratorCount.setText(si.getCollaboratorCount() + " User");
         sourceViewHolder.iconClass.setText(si.getIconClass());
 
         DecimalFormat formatter = new DecimalFormat("#,###,###");

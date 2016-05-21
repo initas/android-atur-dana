@@ -29,6 +29,9 @@ public class Transaction {
     @SerializedName("source")
     @Expose
     private Source source;
+    @SerializedName("to_source")
+    @Expose
+    private Source toSource;
     @SerializedName("category")
     @Expose
     private Category category;
@@ -163,6 +166,24 @@ public class Transaction {
      */
     public void setSource(Source source) {
         this.source = source;
+    }
+
+    /**
+     *
+     * @return
+     *     The toSource
+     */
+    public Source getToSource() {
+        return toSource;
+    }
+
+    /**
+     *
+     * @param toSource
+     *     The toSource
+     */
+    public void setToSource(Source toSource) {
+        this.toSource = toSource;
     }
 
     /**

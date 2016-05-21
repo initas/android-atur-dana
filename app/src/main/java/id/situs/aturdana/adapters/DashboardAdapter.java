@@ -103,7 +103,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             TransactionViewHolder transactionViewHolder = (TransactionViewHolder) holder;
             Transaction transaction = transactionList.get(i - 1);
 
-            transactionViewHolder.vTitle.setText("Mengunakan " + transaction.getSource().getName());
+
+            transactionViewHolder.vTitle.setText("Memakai Dana " + transaction.getSource().getName());
+
+            if(transaction.getToSource() != null){
+                transactionViewHolder.vTitle.setText("Transfer Dana " + transaction.getSource().getName() + " ke " +transaction.getToSource().getName());
+            }
+
             transactionViewHolder.vCategoryName.setText(transaction.getCategory().getName());
             transactionViewHolder.vInfoContainer.setBackgroundColor(Color.parseColor(transaction.getCategory().getHexColor()));
             transactionViewHolder.vCategoryIconClass.setText(transaction.getCategory().getIconClass());
@@ -145,6 +151,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             List<Source> Sources = dashboard.getSources();
 
             //source list
+            transactionHeaderViewHolder.source_list.bringToFront();
             Context context = transactionHeaderViewHolder.source_list.getContext();
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             transactionHeaderViewHolder.source_list.setLayoutManager(layoutManager);

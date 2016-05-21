@@ -1,13 +1,12 @@
 package id.situs.aturdana.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.joanzapata.iconify.Iconify;
@@ -28,8 +27,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Transaction> Transactions;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +34,6 @@ public class MainActivity extends AppCompatActivity {
         Iconify.with(new FontAwesomeModule());
 
         setContentView(R.layout.activity_main);
-
-        //action bar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         //retrofit
         Retrofit retrofit = new Retrofit.Builder()
@@ -76,20 +69,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void transactionDetailActivity(View view) {
+        Intent intent = new Intent(this, TransactionDetailActivity.class);
+        startActivity(intent);
     }
 }
