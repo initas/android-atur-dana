@@ -1,9 +1,11 @@
 package id.situs.aturdana.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import id.situs.aturdana.R;
+import id.situs.aturdana.activities.MainActivity;
+import id.situs.aturdana.activities.ProfileActivity;
+import id.situs.aturdana.activities.TransactionDetailActivity;
 import id.situs.aturdana.models.User;
 
 /**
@@ -27,22 +32,51 @@ public class CollaboratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private List<User> collaboratorList;
     private String color;
     private User userDetail;
+    private static Context context;
 
-    public static class CollaboratorViewHolder extends RecyclerView.ViewHolder {
+    public static class CollaboratorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         protected ImageView image;
+        Integer userId;
 
         public CollaboratorViewHolder(View v) {
             super(v);
+            context = v.getContext();
             image = (ImageView) v.findViewById(R.id.image);
+            image.setOnClickListener(this);
         }
+
+        public void setItem(Integer getUserId) {
+            userId = getUserId;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent =  new Intent(context, ProfileActivity.class);
+            intent.putExtra("userId", userId);
+            context.startActivity(intent);
+        }
+
     }
 
-    public static class CollaboratorHeaderViewHolder extends RecyclerView.ViewHolder {
+    public static class CollaboratorHeaderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         protected ImageView image;
+        Integer userId;
 
         public CollaboratorHeaderViewHolder(View v) {
             super(v);
             image = (ImageView) v.findViewById(R.id.image);
+            image.setOnClickListener(this);
+        }
+
+        public void setItem(Integer getUserId) {
+            userId = getUserId;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent =  new Intent(context, ProfileActivity.class);
+            intent.putExtra("userId", userId);
+            context.startActivity(intent);
         }
     }
 
@@ -94,8 +128,10 @@ public class CollaboratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             CollaboratorViewHolder userViewHolder = (CollaboratorViewHolder) holder;
             User user = collaboratorList.get(i - 1);
 
-            //String imageUrl = user.getImage().getOriginal();
-            String imageUrl = "http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg";
+            ((CollaboratorViewHolder) holder).setItem(user.getId());
+
+            String imageUrl = user.getImage().getOriginal();
+            //String imageUrl = "http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg";
 
             Context context = userViewHolder.image.getContext();
             Picasso.with(context).load(Uri.parse(imageUrl)).into(userViewHolder.image);
@@ -103,8 +139,10 @@ public class CollaboratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (holder instanceof CollaboratorHeaderViewHolder) {
             CollaboratorHeaderViewHolder ownerViewHolder = (CollaboratorHeaderViewHolder) holder;
 
-            //String imageUrl = userDetail.getImage().getOriginal();
-            String imageUrl = "http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg";
+            ((CollaboratorHeaderViewHolder) holder).setItem(userDetail.getId());
+
+            String imageUrl = userDetail.getImage().getOriginal();
+            //String imageUrl = "http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg";
 
             Context context = ownerViewHolder.image.getContext();
             Picasso.with(context).load(Uri.parse(imageUrl)).into(ownerViewHolder.image);

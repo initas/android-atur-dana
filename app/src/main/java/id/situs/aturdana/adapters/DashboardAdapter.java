@@ -103,7 +103,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             TransactionViewHolder transactionViewHolder = (TransactionViewHolder) holder;
             Transaction transaction = transactionList.get(i - 1);
 
-
+            transactionViewHolder.vName.setText(transaction.getUser().getFullName());
             transactionViewHolder.vTitle.setText("Memakai Dana " + transaction.getSource().getName());
 
             if(transaction.getToSource() != null){
@@ -138,8 +138,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
 
             Context context = transactionViewHolder.vImage.getContext();
-            Picasso.with(context).load(Uri.parse("http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg")).into(transactionViewHolder.vImage);
-            //Picasso.with(context).load(Uri.parse(ci.getImageUrl())).into(transactionViewHolder.vImage);
+            Picasso.with(context).load(Uri.parse(transaction.getUser().getImage().getOriginal())).into(transactionViewHolder.vImage);
+            //Picasso.with(context).load(Uri.parse("http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg")).into(transactionViewHolder.vImage);
 
         } else if (holder instanceof TransactionHeaderViewHolder) {
             TransactionHeaderViewHolder transactionHeaderViewHolder = (TransactionHeaderViewHolder) holder;
