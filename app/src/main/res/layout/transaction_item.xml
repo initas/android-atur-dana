@@ -175,7 +175,7 @@
                     android:layout_marginRight="16px"
                     android:layout_marginTop="6dp"
                     android:includeFontPadding="false"
-                    android:text="Comment"
+                    android:text="Komentar"
                     android:textSize="8dp" />
 
             </LinearLayout>

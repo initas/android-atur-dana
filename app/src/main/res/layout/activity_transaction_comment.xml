@@ -9,16 +9,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#27AE60">
+        android:background="@color/colorPrimary">
 
         <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:clickable="true"
+            android:gravity="center_vertical"
             android:onClick="back"
+            android:paddingLeft="16dp"
             android:text="{fa-arrow-left}"
             android:textColor="#fff"
             android:textSize="20dp" />
@@ -27,29 +26,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="COMMENT"
+            android:text="KOMENTAR"
             android:textColor="#fff"
             android:textSize="20dp" />
 
         <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
             android:clickable="true"
-            android:onClick="transactionDetailActivity"
+            android:gravity="center_vertical|right"
+            android:onClick="postTransactionComment"
+            android:paddingRight="16dp"
             android:text="{fa-check}"
             android:textColor="#fff"
             android:textSize="20dp" />
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/transaction_comment_list"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="56dp"></android.support.v7.widget.RecyclerView>
+        android:layout_marginTop="56dp"
+        android:background="#ddd"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/transaction_comment_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#ffffff"></android.support.v7.widget.RecyclerView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="#ffffff"
+            android:hint="Tulis Komentar"
+            android:padding="16dp"
+            android:textSize="12dp" />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
