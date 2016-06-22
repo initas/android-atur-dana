@@ -1,67 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
-    android:fitsSystemWindows="true">
+    android:background="#fafafa"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#27AE60">
+        android:layout_height="match_parent">
 
-        <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
-            android:text="{fa-bars}"
-            android:textColor="#fff"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="DASHBOARD"
-            android:textColor="#fff"
-            android:textSize="20dp" />
-
-        <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
-            android:clickable="true"
-            android:onClick="transactionDetailActivity"
-            android:text="{fa-plus}"
-            android:textColor="#fff"
-            android:textSize="20dp" />
-    </RelativeLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="56dp">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/transaction_list"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="56dp"
+            android:background="#27AE60">
 
-    </FrameLayout>
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:clickable="true"
+                android:onClick="toggleDrawer"
+                android:text="{fa-bars}"
+                android:textColor="#fff"
+                android:textSize="20dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/bottom_shadow" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="DASHBOARD"
+                android:textColor="#fff"
+                android:textSize="20dp" />
 
-    <include layout="@layout/drawer"></include>
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:clickable="true"
+                android:onClick="transactionDetailActivity"
+                android:text="{fa-plus}"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+        </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="56dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/transaction_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/bottom_shadow" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/drawer" />
+
+</android.support.v4.widget.DrawerLayout>

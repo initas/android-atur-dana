@@ -1,11 +1,13 @@
 package id.situs.aturdana.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import id.situs.aturdana.R;
+import id.situs.aturdana.activities.ProfileActivity;
 import id.situs.aturdana.models.Dashboard;
 import id.situs.aturdana.models.Source;
 import id.situs.aturdana.models.Transaction;
@@ -54,6 +57,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         protected TextView vCategoryIconClass;
         protected RelativeLayout vInfoContainer;
         protected TextView vTimestamp;
+        protected TextView vComment;
 
         public TransactionViewHolder(View v) {
             super(v);
@@ -67,6 +71,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             vCategoryName = (TextView) v.findViewById(R.id.category_name);
             vCategoryIconClass = (TextView) v.findViewById(R.id.category_icon_class);
             vInfoContainer = (RelativeLayout) v.findViewById(R.id.info_container);
+            vComment = (TextView) v.findViewById(R.id.comment);
             vTitle = (TextView) v.findViewById(R.id.title);
         }
     }
@@ -140,6 +145,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Context context = transactionViewHolder.vImage.getContext();
             Picasso.with(context).load(Uri.parse(transaction.getUser().getImage().getOriginal())).into(transactionViewHolder.vImage);
             //Picasso.with(context).load(Uri.parse("http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg")).into(transactionViewHolder.vImage);
+
+            transactionViewHolder.vComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.w("Test", "Checkbox clicked");
+                }
+            });
+
 
         } else if (holder instanceof TransactionHeaderViewHolder) {
             TransactionHeaderViewHolder transactionHeaderViewHolder = (TransactionHeaderViewHolder) holder;

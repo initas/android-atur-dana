@@ -3,9 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <item
-        android:id="@+id/action_check"
-        android:orderInCategory="200"
-        android:title="Search"
-        app:showAsAction="ifRoom"></item>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:title="Import" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:title="Gallery" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:title="Slideshow" />
+        <item
+            android:id="@+id/nav_manage"
+            android:title="Tools" />
+    </group>
+
 </menu>
