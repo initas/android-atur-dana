@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,9 +23,11 @@ import java.util.List;
 
 import id.situs.aturdana.R;
 import id.situs.aturdana.activities.ProfileActivity;
+import id.situs.aturdana.activities.TransactionCommentActivity;
 import id.situs.aturdana.models.Dashboard;
 import id.situs.aturdana.models.Source;
 import id.situs.aturdana.models.Transaction;
+import id.situs.aturdana.models.TransactionComment;
 
 /**
  * Created by MF on 3/20/16.
@@ -57,7 +60,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         protected TextView vCategoryIconClass;
         protected RelativeLayout vInfoContainer;
         protected TextView vTimestamp;
-        protected TextView vComment;
+        protected LinearLayout vComment;
 
         public TransactionViewHolder(View v) {
             super(v);
@@ -71,7 +74,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             vCategoryName = (TextView) v.findViewById(R.id.category_name);
             vCategoryIconClass = (TextView) v.findViewById(R.id.category_icon_class);
             vInfoContainer = (RelativeLayout) v.findViewById(R.id.info_container);
-            vComment = (TextView) v.findViewById(R.id.comment);
+            vComment = (LinearLayout) v.findViewById(R.id.comment);
             vTitle = (TextView) v.findViewById(R.id.title);
         }
     }
@@ -106,7 +109,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         if (holder instanceof TransactionViewHolder) {
             TransactionViewHolder transactionViewHolder = (TransactionViewHolder) holder;
-            Transaction transaction = transactionList.get(i - 1);
+            final Transaction transaction = transactionList.get(i - 1);
 
             transactionViewHolder.vName.setText(transaction.getUser().getFullName());
             transactionViewHolder.vTitle.setText("Memakai Dana " + transaction.getSource().getName());
@@ -149,7 +152,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             transactionViewHolder.vComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.w("Test", "Checkbox clicked");
+                    Intent intent =  new Intent(v.getContext(), TransactionCommentActivity.class);
+                    intent.putExtra("transactionId", transaction.getId());
+                    v.getContext().startActivity(intent);
                 }
             });
 
