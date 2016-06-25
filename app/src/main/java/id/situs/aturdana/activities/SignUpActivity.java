@@ -1,5 +1,6 @@
 package id.situs.aturdana.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,22 +12,28 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import id.situs.aturdana.R;
 
 /**
- * Created by MF on 5/20/16.
+ * Created by MF on 6/24/16.
  */
-public class TransactionDetailActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Iconify.with(new FontAwesomeModule());
 
-        setContentView(R.layout.activity_transaction_detail);
+        setContentView(R.layout.activity_sign_up);
 
         setToolbar();
     }
 
     public void back(View view) {
-        this.finish();
+        Intent intent = new Intent(this, LaunchActivity.class);
+        startActivity(intent);
+    }
+
+    public void signUp(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void setToolbar() {
@@ -36,7 +43,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
         leftButton.setText("{fa-arrow-left}");
         rightButton.setText("{fa-check}");
-        toolbarTitle.setText("BCA");
+        toolbarTitle.setText("Daftar");
 
         leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +55,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //signIn(v);
+                signUp(v);
             }
         });
     }

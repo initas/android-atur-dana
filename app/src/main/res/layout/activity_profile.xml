@@ -7,55 +7,21 @@
     android:background="#27AE60"
     android:fitsSystemWindows="true">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/colorPrimary">
-
-        <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:onClick="back"
-            android:paddingLeft="16dp"
-            android:text="{fa-arrow-left}"
-            android:textColor="#fff"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Profil"
-            android:textColor="#fff"
-            android:textSize="20dp" />
-
-        <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_alignParentRight="true"
-            android:clickable="true"
-            android:gravity="center_vertical|right"
-            android:onClick="editProfile"
-            android:paddingRight="16dp"
-            android:text="{fa-pencil}"
-            android:textColor="#fff"
-            android:textSize="20dp" />
-    </RelativeLayout>
+    <include layout="@layout/toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="56dp">
+        android:layout_marginTop="56dp"
+        android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="32dp" />
+            android:layout_margin="32dp"
+            android:clickable="true" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_username"

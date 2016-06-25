@@ -43,6 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_profile);
 
+        setToolbar();
+
         Intent intent = getIntent();
         Integer userId = intent.getIntExtra("userId", -1);
 
@@ -64,9 +66,9 @@ public class ProfileActivity extends AppCompatActivity {
                     User user = response.body();
                     Log.d("+++", "response = " + new Gson().toJson(user));
 
-                    TextView name = (TextView)findViewById(R.id.name);
-                    TextView username = (TextView)findViewById(R.id.username);
-                    ImageView image = (ImageView)findViewById(R.id.imageView);
+                    TextView name = (TextView) findViewById(R.id.name);
+                    TextView username = (TextView) findViewById(R.id.username);
+                    ImageView image = (ImageView) findViewById(R.id.imageView);
 
                     name.setText(user.getFullName());
                     username.setText(user.getUsername());
@@ -91,5 +93,29 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void back(View view) {
         this.finish();
+    }
+
+    public void setToolbar() {
+        TextView leftButton = (TextView) findViewById(R.id.left_button);
+        TextView rightButton = (TextView) findViewById(R.id.right_button);
+        TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+
+        leftButton.setText("{fa-arrow-left}");
+        rightButton.setText("{fa-pencil}");
+        toolbarTitle.setText("PROFILE");
+
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back(v);
+            }
+        });
+
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //transactionDetailActivity(v);
+            }
+        });
     }
 }

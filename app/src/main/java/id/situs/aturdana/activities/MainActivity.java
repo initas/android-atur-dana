@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.joanzapata.iconify.Iconify;
@@ -41,18 +42,20 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        setToolbar();
+
         //drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         //retrofit
         String baseUrl = getResources().getString(R.string.api_address);
 
-        Retrofit retrofit = new Retrofit.Builder()
+        final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        ApiAddressInterface service = retrofit.create(ApiAddressInterface.class);
+        final ApiAddressInterface service = retrofit.create(ApiAddressInterface.class);
         Call<Dashboard> call = service.getDashboard();
 
         call.enqueue(new Callback<Dashboard>() {
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     //transaction list
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.transaction_list);
                     recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    DashboardAdapter dashboardAdapter = new DashboardAdapter(dashboard);
+                    DashboardAdapter dashboardAdapter = new DashboardAdapter(dashboard, retrofit, service);
                     recyclerView.setAdapter(dashboardAdapter);
                 } else {
                     Log.d("+++", "Status Code = " + response.code());
@@ -85,11 +88,40 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void signOut(View view) {
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+    }
+
     public void toggleDrawer(View view) {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
+    }
+
+    public void setToolbar() {
+        TextView leftButton = (TextView) findViewById(R.id.left_button);
+        TextView rightButton = (TextView) findViewById(R.id.right_button);
+        TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+
+        leftButton.setText("{fa-bars}");
+        rightButton.setText("{fa-plus}");
+        toolbarTitle.setText("DASHBOARD");
+
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleDrawer(v);
+            }
+        });
+
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transactionDetailActivity(v);
+            }
+        });
     }
 }

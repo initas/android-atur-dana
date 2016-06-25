@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.joanzapata.iconify.Iconify;
@@ -36,6 +37,8 @@ public class TransactionCommentActivity extends AppCompatActivity {
         Iconify.with(new FontAwesomeModule());
 
         setContentView(R.layout.activity_transaction_comment);
+
+        setToolbar();
 
         Intent intent = getIntent();
         final Integer transactionId = intent.getIntExtra("transactionId", -1);
@@ -78,5 +81,29 @@ public class TransactionCommentActivity extends AppCompatActivity {
 
     public void back(View view) {
         this.finish();
+    }
+
+    public void setToolbar() {
+        TextView leftButton = (TextView) findViewById(R.id.left_button);
+        TextView rightButton = (TextView) findViewById(R.id.right_button);
+        TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+
+        leftButton.setText("{fa-arrow-left}");
+        rightButton.setText("{fa-check}");
+        toolbarTitle.setText("KOMENTAR");
+
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back(v);
+            }
+        });
+
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //signIn(v);
+            }
+        });
     }
 }

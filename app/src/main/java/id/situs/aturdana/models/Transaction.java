@@ -2,6 +2,7 @@
 package id.situs.aturdana.models;
 
 import javax.annotation.Generated;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -41,203 +42,176 @@ public class Transaction {
     @SerializedName("location")
     @Expose
     private Location location;
+    @SerializedName("logged_on_user")
+    @Expose
+    private LoggedOnUser loggedOnUser;
 
     /**
-     * 
-     * @return
-     *     The id
+     * @return The id
      */
     public int getId() {
         return id;
     }
 
     /**
-     * 
-     * @param id
-     *     The id
+     * @param id The id
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * 
-     * @return
-     *     The amount
+     * @return The amount
      */
     public Double getAmount() {
         return amount;
     }
 
     /**
-     * 
-     * @param amount
-     *     The amount
+     * @param amount The amount
      */
     public void setAmount(Double amount) {
         this.amount = amount;
     }
 
     /**
-     * 
-     * @return
-     *     The description
+     * @return The description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
-     * @param description
-     *     The description
+     * @param description The description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * 
-     * @return
-     *     The transactionAt
+     * @return The transactionAt
      */
     public int getTransactionAt() {
         return transactionAt;
     }
 
     /**
-     * 
-     * @param transactionAt
-     *     The transaction_at
+     * @param transactionAt The transaction_at
      */
     public void setTransactionAt(int transactionAt) {
         this.transactionAt = transactionAt;
     }
 
     /**
-     * 
-     * @return
-     *     The updatedAt
+     * @return The updatedAt
      */
     public int getUpdatedAt() {
         return updatedAt;
     }
 
     /**
-     * 
-     * @param updatedAt
-     *     The updated_at
+     * @param updatedAt The updated_at
      */
     public void setUpdatedAt(int updatedAt) {
         this.updatedAt = updatedAt;
     }
 
     /**
-     * 
-     * @return
-     *     The user
+     * @return The user
      */
     public User getUser() {
         return user;
     }
 
     /**
-     * 
-     * @param user
-     *     The user
+     * @param user The user
      */
     public void setUser(User user) {
         this.user = user;
     }
 
     /**
-     * 
-     * @return
-     *     The source
+     * @return The source
      */
     public Source getSource() {
         return source;
     }
 
     /**
-     * 
-     * @param source
-     *     The source
+     * @param source The source
      */
     public void setSource(Source source) {
         this.source = source;
     }
 
     /**
-     *
-     * @return
-     *     The toSource
+     * @return The toSource
      */
     public Source getToSource() {
         return toSource;
     }
 
     /**
-     *
-     * @param toSource
-     *     The toSource
+     * @param toSource The toSource
      */
     public void setToSource(Source toSource) {
         this.toSource = toSource;
     }
 
     /**
-     * 
-     * @return
-     *     The category
+     * @return The category
      */
     public Category getCategory() {
         return category;
     }
 
     /**
-     * 
-     * @param category
-     *     The category
+     * @param category The category
      */
     public void setCategory(Category category) {
         this.category = category;
     }
 
     /**
-     * 
-     * @return
-     *     The image
+     * @return The image
      */
     public Image getImage() {
         return image;
     }
 
     /**
-     * 
-     * @param image
-     *     The image
+     * @param image The image
      */
     public void setImage(Image image) {
         this.image = image;
     }
 
     /**
-     * 
-     * @return
-     *     The location
+     * @return The location
      */
     public Location getLocation() {
         return location;
     }
 
     /**
-     * 
-     * @param location
-     *     The location
+     * @param location The location
      */
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    /**
+     * @return The loggedOnUser
+     */
+    public LoggedOnUser getLoggedOnUser() {
+        return loggedOnUser;
+    }
+
+    /**
+     * @param loggedOnUser The loggedOnUser
+     */
+    public void setLoggedOnUser(LoggedOnUser loggedOnUser) {
+        this.loggedOnUser = loggedOnUser;
     }
 
 }

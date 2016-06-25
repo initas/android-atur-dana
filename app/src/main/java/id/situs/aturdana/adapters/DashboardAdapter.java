@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -28,6 +29,13 @@ import id.situs.aturdana.models.Dashboard;
 import id.situs.aturdana.models.Source;
 import id.situs.aturdana.models.Transaction;
 import id.situs.aturdana.models.TransactionComment;
+import id.situs.aturdana.models.Wrapper;
+import id.situs.aturdana.rest.ApiAddressInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by MF on 3/20/16.
@@ -37,6 +45,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int TYPE_ITEM = 1;
     private Dashboard dashboard;
     private List<Transaction> transactionList;
+    private Retrofit retrofit;
+    private ApiAddressInterface service;
 
     public static class TransactionHeaderViewHolder extends RecyclerView.ViewHolder {
         protected RecyclerView source_list;
@@ -61,6 +71,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         protected RelativeLayout vInfoContainer;
         protected TextView vTimestamp;
         protected LinearLayout vComment;
+        protected LinearLayout vPin;
+        protected TextView vPinIcon;
 
         public TransactionViewHolder(View v) {
             super(v);
@@ -75,13 +87,17 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             vCategoryIconClass = (TextView) v.findViewById(R.id.category_icon_class);
             vInfoContainer = (RelativeLayout) v.findViewById(R.id.info_container);
             vComment = (LinearLayout) v.findViewById(R.id.comment);
+            vPin = (LinearLayout) v.findViewById(R.id.pin);
             vTitle = (TextView) v.findViewById(R.id.title);
+            vPinIcon = (TextView) v.findViewById(R.id.pin_icon);
         }
     }
 
-    public DashboardAdapter(Dashboard dashboard) {
+    public DashboardAdapter(Dashboard dashboard, Retrofit retrofit, ApiAddressInterface apiAddressInterface) {
         this.dashboard = dashboard;
         this.transactionList = dashboard.getTransactions();
+        this.retrofit = retrofit;
+        this.service = apiAddressInterface;
     }
 
     @Override
@@ -108,7 +124,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int i) {
 
         if (holder instanceof TransactionViewHolder) {
-            TransactionViewHolder transactionViewHolder = (TransactionViewHolder) holder;
+            final TransactionViewHolder transactionViewHolder = (TransactionViewHolder) holder;
             final Transaction transaction = transactionList.get(i - 1);
 
             transactionViewHolder.vName.setText(transaction.getUser().getFullName());
@@ -145,6 +161,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Picasso.with(context).load(Uri.parse(photo)).into(transactionViewHolder.vPhoto);
             }
 
+            if(transaction.getLoggedOnUser() != null){
+                if(transaction.getLoggedOnUser().getIsPinned() == true){
+                    transactionViewHolder.vPinIcon.setTextColor(Color.parseColor("#27AE60"));
+                    transactionViewHolder.vPinIcon.setText("{fa-bookmark}");
+                }
+            }
+
             Context context = transactionViewHolder.vImage.getContext();
             Picasso.with(context).load(Uri.parse(transaction.getUser().getImage().getOriginal())).into(transactionViewHolder.vImage);
             //Picasso.with(context).load(Uri.parse("http://www.freeapplewallpapers.com/wp-content/uploads/2014/03/Lovely-Asian-Girl-In-The-Sun-150x150.jpg")).into(transactionViewHolder.vImage);
@@ -155,6 +178,46 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     Intent intent =  new Intent(v.getContext(), TransactionCommentActivity.class);
                     intent.putExtra("transactionId", transaction.getId());
                     v.getContext().startActivity(intent);
+                }
+            });
+
+            transactionViewHolder.vPin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    transactionViewHolder.vPinIcon.setTextColor(Color.parseColor("#000000"));
+                    transactionViewHolder.vPinIcon.setText("{fa-bookmark}");
+                    transactionViewHolder.vPin.setClickable(false);
+
+                    Call<Wrapper> call = service.postUserPin(1, transaction.getId(), "debug", "admin");
+
+                    call.enqueue(new Callback<Wrapper>() {
+                        @Override
+                        public void onResponse(Call<Wrapper> call, Response<Wrapper> response) {
+                            if (response.isSuccessful()) {
+                                transactionViewHolder.vPin.setClickable(true);
+
+                                Wrapper wrapper = response.body();
+                                Log.d("+++", "response = " + new Gson().toJson(wrapper));
+
+                                if(wrapper.getStatus() == 1){
+                                    Log.d("+++", "status = " + wrapper.getStatus());
+                                    transactionViewHolder.vPinIcon.setTextColor(Color.parseColor("#27AE60"));
+                                }else{
+                                    Log.d("+++", "status = " + wrapper.getStatus());
+                                    transactionViewHolder.vPinIcon.setText("{fa-bookmark-o}");
+                                }
+
+                            } else {
+                                Log.d("+++", "Status Code = " + response.code());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Wrapper> call, Throwable t) {
+                            Log.d("+++", t.getMessage());
+                        }
+
+                    });
                 }
             });
 
