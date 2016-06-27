@@ -14,7 +14,7 @@ import id.situs.aturdana.R;
 /**
  * Created by MF on 6/24/16.
  */
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
         setToolbar();
     }
 
+    @Override
     public void back(View view) {
         Intent intent = new Intent(this, LaunchActivity.class);
         startActivity(intent);
@@ -33,6 +34,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void signUp(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void signIn(View view) {
+        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }
 

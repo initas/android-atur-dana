@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Generated("org.jsonschema2pojo")
-public class TransactionComment {
+public class TransactionComment extends Wrapper {
 
     @SerializedName("id")
     @Expose
@@ -24,10 +24,12 @@ public class TransactionComment {
     @SerializedName("user")
     @Expose
     private User user;
-
     @SerializedName("data")
     @Expose
     private List<TransactionComment> data = new ArrayList<TransactionComment>();
+    @SerializedName("errors")
+    @Expose
+    private TransactionCommentError errors;
 
     /**
      * @return The id
@@ -98,5 +100,19 @@ public class TransactionComment {
      */
     public void setData(List<TransactionComment> data) {
         this.data = data;
+    }
+
+    /**
+     * @return The errors
+     */
+    public TransactionCommentError getErrors() {
+        return errors;
+    }
+
+    /**
+     * @param user The errors
+     */
+    public void setErrors(TransactionCommentError errors) {
+        this.errors = errors;
     }
 }

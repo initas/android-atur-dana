@@ -32,11 +32,28 @@ public interface ApiAddressInterface {
     Call<TransactionComment> getTransactionComment(@Query("transaction") int transactionId);
 
     @FormUrlEncoded
+    @POST("transaction-comments")
+    Call<TransactionComment> postTransactionComment(
+            @Field("transaction_id") int transactionId,
+            @Field("description") String description,
+            @Header("access-token") String accessToken,
+            @Header("auth-token") String authToken
+    );
+
+    @FormUrlEncoded
     @POST("users/{userId}/pin")
     Call<Wrapper> postUserPin(
             @Path("userId") int userId,
             @Field("transaction_id") int transactionId,
             @Header("access-token") String accessToken,
             @Header("auth-token") String authToken
+    );
+
+    @FormUrlEncoded
+    @POST("users/login")
+    Call<User> postLogin(
+            @Field("email") String email,
+            @Field("password") String password,
+            @Header("access-token") String accessToken
     );
 }

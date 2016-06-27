@@ -3,6 +3,7 @@ package id.situs.aturdana.adapters;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +27,14 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<RecyclerView
         private TextView name;
         private TextView description;
         private ImageView photo;
+        private TextView timestamp;
 
         public TransactionCommentViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.name);
             description = (TextView) v.findViewById(R.id.description);
-            photo = (ImageView) v.findViewById(R.id.photo); 
+            photo = (ImageView) v.findViewById(R.id.photo);
+            timestamp = (TextView) v.findViewById(R.id.timestamp);
         }
     }
 
@@ -56,6 +59,10 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<RecyclerView
         transactionCommentViewHolder.name.setText(si.getUser().getFullName());
         transactionCommentViewHolder.description.setText(si.getDescription());
 
+
+        String time = (String) DateUtils.getRelativeTimeSpanString(si.getUpdatedAt());
+        transactionCommentViewHolder.timestamp.setText(time);
+
         String imageUrl = si.getUser().getImage().getOriginal();
         Context context = transactionCommentViewHolder.photo.getContext();
         Picasso.with(context).load(Uri.parse(imageUrl)).into(transactionCommentViewHolder.photo);
@@ -64,5 +71,10 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public int getItemCount() {
         return transactionCommentList.size();
+    }
+
+    public void insert(int position, TransactionComment transactionComment) {
+        transactionCommentList.add(position, transactionComment);
+        notifyItemInserted(position);
     }
 }

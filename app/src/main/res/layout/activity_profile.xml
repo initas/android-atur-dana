@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#27AE60"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,15 +25,18 @@
             android:id="@+id/input_layout_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp">
+            android:layout_margin="16dp"
+            android:theme="@style/whiteEditText">
 
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:hint="Username"
                 android:enabled="false"
-                android:hint="username"
-                android:singleLine="true" />
+                android:textColor="#ffffff" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -43,15 +44,18 @@
             android:id="@+id/input_layout_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp">
+            android:layout_margin="16dp"
+            android:theme="@style/whiteEditText">
 
             <EditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:hint="Name"
                 android:enabled="false"
-                android:hint="username"
-                android:singleLine="true" />
+                android:textColor="#ffffff" />
 
         </android.support.design.widget.TextInputLayout>
 

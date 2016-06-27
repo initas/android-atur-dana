@@ -2,7 +2,9 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:clickable="true"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true">
 
     <include layout="@layout/toolbar" />
 
@@ -13,6 +15,7 @@
         android:background="#ddd"
         android:orientation="vertical">
 
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/transaction_comment_list"
             android:layout_width="match_parent"
@@ -21,12 +24,14 @@
             android:background="#ffffff"></android.support.v7.widget.RecyclerView>
 
         <EditText
+            android:id="@+id/etDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:background="#ffffff"
             android:hint="Tulis Komentar"
             android:padding="16dp"
+            android:singleLine="true"
             android:textSize="12dp" />
     </LinearLayout>
 

@@ -18,30 +18,35 @@
             android:id="@+id/input_layout_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="32dp"
+            android:theme="@style/whiteEditText">
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:singleLine="true" />
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColor="#ffffff" />
 
         </android.support.design.widget.TextInputLayout>
-
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="32dp"
+            android:theme="@style/whiteEditText">
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
-                android:singleLine="true" />
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="#ffffff" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -49,23 +54,36 @@
             android:id="@+id/input_layout_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp">
+            android:layout_marginBottom="32dp"
+            android:theme="@style/whiteEditText">
 
             <EditText
                 android:id="@+id/confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirm Password"
+                android:hint="Konfirmasi Password"
+                android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="#ffffff" />
 
         </android.support.design.widget.TextInputLayout>
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sudah Punya Akun?"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="32dp"
+            android:textSize="12dp"
+            android:clickable="true"
+            android:onClick="signIn"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/term"
-            android:textColor="#ffffff"
+            android:textColor="#80FFFFFF"
             android:textSize="12dp" />
 
 

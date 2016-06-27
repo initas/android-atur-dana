@@ -102,7 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         leftButton.setText("{fa-arrow-left}");
         rightButton.setText("{fa-pencil}");
-        toolbarTitle.setText("PROFILE");
+        toolbarTitle.setText("PROFIL");
 
         leftButton.setOnClickListener(new View.OnClickListener() {
             @Override

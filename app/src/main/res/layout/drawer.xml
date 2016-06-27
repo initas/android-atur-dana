@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#fafafa"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -50,142 +51,182 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        app:mrl_rippleBackground="#ffffff"
+        app:mrl_rippleColor="@color/colorPrimaryDark">
 
-        <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="{fa-tachometer}"
-            android:textColor="#000000"
-            android:textSize="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:includeFontPadding="false"
-            android:text="Dashboard"
-            android:textColor="#000000"
-            android:textSize="20dp" />
-    </LinearLayout>
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="{fa-tachometer}"
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:includeFontPadding="false"
+                android:text="Dashboard"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </LinearLayout>
 
-    <LinearLayout
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        app:mrl_rippleBackground="#ffffff"
+        app:mrl_rippleColor="@color/colorPrimaryDark">
 
-        <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="{fa-stack-overflow}"
-            android:textColor="#000000"
-            android:textSize="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:includeFontPadding="false"
-            android:text="Transaksi"
-            android:textColor="#000000"
-            android:textSize="20dp" />
-    </LinearLayout>
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="{fa-stack-overflow}"
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
-    <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:includeFontPadding="false"
+                android:text="Transaksi"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        app:mrl_rippleBackground="#ffffff"
+        app:mrl_rippleColor="@color/colorPrimaryDark">
 
-        <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="{fa-bar-chart}"
-            android:textColor="#000000"
-            android:textSize="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:includeFontPadding="false"
-            android:text="Laporan"
-            android:textColor="#000000"
-            android:textSize="20dp" />
-    </LinearLayout>
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="{fa-bar-chart}"
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
-    <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:includeFontPadding="false"
+                android:text="Laporan"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        app:mrl_rippleBackground="#ffffff"
+        app:mrl_rippleColor="@color/colorPrimaryDark">
 
-        <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="{fa-question}"
-            android:textColor="#000000"
-            android:textSize="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:includeFontPadding="false"
-            android:text="Info"
-            android:textColor="#000000"
-            android:textSize="20dp" />
-    </LinearLayout>
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="{fa-question}"
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
-    <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:includeFontPadding="false"
+                android:text="Info"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:layout_marginTop="1dp"
+        app:mrl_rippleBackground="#ffffff"
+        app:mrl_rippleColor="@color/colorPrimaryDark">
 
-        <com.joanzapata.iconify.widget.IconTextView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="{fa-question}"
-            android:textColor="#000000"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:includeFontPadding="false"
-            android:text="Sign Out"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:clickable="true"
             android:onClick="signOut"
-            android:textColor="#000000"
-            android:textSize="20dp" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="{fa-power-off}"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:includeFontPadding="false"
+                android:text="Sign Out"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+    </com.balysv.materialripple.MaterialRippleLayout>
 
 </LinearLayout>
