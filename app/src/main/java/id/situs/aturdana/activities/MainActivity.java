@@ -1,42 +1,47 @@
 package id.situs.aturdana.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
-
-import java.util.List;
+import com.squareup.picasso.Picasso;
 
 import id.situs.aturdana.R;
 import id.situs.aturdana.adapters.DashboardAdapter;
 import id.situs.aturdana.rest.ApiAddressInterface;
 import id.situs.aturdana.models.Dashboard;
-import id.situs.aturdana.models.Transaction;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkLogin();
+    }
+
+    @Override
+    public void onLogin() {
 
         Iconify.with(new FontAwesomeModule());
 
@@ -46,6 +51,25 @@ public class MainActivity extends AppCompatActivity {
 
         //drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView = navigationView.inflateHeaderView(R.layout.drawer);
+
+        SharedPreferences sp1 = this.getSharedPreferences("Login", 0);
+        TextView fullName = (TextView) hView.findViewById(R.id.fullName);
+        TextView username = (TextView) hView.findViewById(R.id.username);
+        ImageView photo = (ImageView) hView.findViewById(R.id.imageView);
+
+        fullName.setText(sp1.getString("fullName", "kamu"));
+        username.setText(sp1.getString("username", "kamu"));
+
+        String photoValue = sp1.getString("image", null);
+
+        if (photoValue != null) {
+            Context context = photo.getContext();
+            Picasso.with(context).load(Uri.parse(photoValue)).into(photo);
+        }
+
 
         //retrofit
         String baseUrl = getResources().getString(R.string.api_address);
@@ -81,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
     }
 
     public void transactionDetailActivity(View view) {
@@ -89,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signOut(View view) {
+        getSharedPreferences("Login", 0).edit().clear().commit();
         Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }

@@ -2,6 +2,8 @@ package id.situs.aturdana.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,4 +44,16 @@ public class BaseActivity extends AppCompatActivity {
     public void back(View view) {
         this.finish();
     }
+
+    public void checkLogin(){
+        SharedPreferences sp1=this.getSharedPreferences("Login",0);
+        if(!sp1.getBoolean("isLoggedIn", false)){
+            Intent intent = new Intent(this, SignInActivity.class);
+            startActivity(intent);
+        }else{
+            onLogin();
+        };
+    }
+
+    public void onLogin(){}
 }

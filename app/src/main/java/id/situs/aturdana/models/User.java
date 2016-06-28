@@ -1,6 +1,7 @@
 package id.situs.aturdana.models;
 
 import javax.annotation.Generated;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,6 +14,9 @@ public class User extends Wrapper {
     @SerializedName("full_name")
     @Expose
     private String fullName;
+    @SerializedName("email")
+    @Expose
+    private String email;
     @SerializedName("username")
     @Expose
     private String username;
@@ -48,7 +52,6 @@ public class User extends Wrapper {
         this.fullName = fullName;
     }
 
-
     /**
      * @return The username
      */
@@ -61,6 +64,20 @@ public class User extends Wrapper {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    /**
+     * @return The email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param fullName The email
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**

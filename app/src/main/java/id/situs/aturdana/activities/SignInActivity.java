@@ -2,6 +2,7 @@ package id.situs.aturdana.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.joanzapata.iconify.Iconify;
@@ -33,6 +35,7 @@ public class SignInActivity extends BaseActivity {
     private TextView vPassword;
     private Retrofit retrofit;
     private ApiAddressInterface service;
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +77,11 @@ public class SignInActivity extends BaseActivity {
                     User user = response.body();
                     Log.d("+++", "response = " + new Gson().toJson(user));
 
-                    if(user.getStatus() == 1){
+                    if (user.getStatus() == 1) {
+                        saveUserPreferences(user);
                         mainActivity(view);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Invalid Credential", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Log.d("+++", "Status Code = " + response.code());
@@ -123,5 +129,16 @@ public class SignInActivity extends BaseActivity {
                 signIn(v);
             }
         });
+    }
+
+    public void saveUserPreferences(User user) {
+        SharedPreferences sp = getSharedPreferences("Login", 0);
+        SharedPreferences.Editor Ed = sp.edit();
+        Ed.putBoolean("isLoggedIn", true);
+        Ed.putString("fullName", user.getFullName());
+        Ed.putString("email", user.getEmail());
+        Ed.putString("username", user.getUsername());
+        Ed.putString("image", user.getImage().getOriginal());
+        Ed.commit();
     }
 }
